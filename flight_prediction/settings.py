@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7*_nh7w4(8h347m9vig)(@5==*_z2rdp7zoybn24of7362=*^*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,10 +49,13 @@ INSTALLED_APPS = [
 ]
 
 # Code that runs on every request/response cycle
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # order matters here
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,12 +135,8 @@ STATIC_URL = 'static/'
 # Cors Settings
 # allow frontend applications to communicate with this backend
 # during development
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Vite dev server
-    "http://localhost:3000",  # Create React App
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:3000",
-]
+CORS_ALLOWED_ORIGINS = ['*']
+
 
 CORS_ALLOW_CREDENTIALS = True
 
