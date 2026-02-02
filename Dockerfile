@@ -1,15 +1,23 @@
-FROM python:3.11-slim
+# TODO: Change to an officially released version of Python before deploying to production.
+ARG PYTHON_VERSION=3.13-slim
+
+FROM python:${PYTHON_VERSION}
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app
+RUN mkdir -p /code
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /code
 
-COPY . .
+RUN pip install pipenv
+COPY Pipfile Pipfile.lock /code/
+RUN pipenv install --deploy --system
+COPY . /code
 
+ENV SECRET_KEY "1bXwjSyVAJ3kSTWAhxHn4ngVQr2BgLg6XOsLlGWSLoSMCoc2UJ"
 RUN python manage.py collectstatic --noinput
 
-CMD ["gunicorn", "flight_prediction.wsgi:application", "--bind", "0.0.0.0:8000"]
+EXPOSE 8000
+
+CMD ["gunicorn","--bind",":8000","--workers","2","flight_prediction.wsgi"]
