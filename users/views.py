@@ -11,9 +11,16 @@ from .serializers import (
     UserUpdateSerializer
 )
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 @permission_classes([AllowAny])
 def register_user(request):
+    if request.method == 'GET':
+        return Response({
+            'message': 'User registration endpoint',
+            'method': 'POST',
+            'required_fields': ['username', 'email', 'password', 'password2', 'first_name', 'last_name']
+        })
+    
     serializer = UserRegistrationSerializer(data=request.data)
     
     if serializer.is_valid():
