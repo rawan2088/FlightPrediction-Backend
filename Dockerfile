@@ -15,7 +15,7 @@ COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --deploy --system
 COPY . /code
 
-ENV SECRET_KEY "1bXwjSyVAJ3kSTWAhxHn4ngVQr2BgLg6XOsLlGWSLoSMCoc2UJ"
+ENV SECRET_KEY "chKptPlsII8TcnIRaGPWKVYIslmXKa1nEmHvijIiTHTu9fl93U"
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
