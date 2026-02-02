@@ -141,8 +141,9 @@ STATIC_URL = 'static/'
 # Cors Settings
 # allow frontend applications to communicate with this backend
 # during development
-CORS_ALLOWED_ORIGINS = ['*']
-
+CORS_ALLOWED_ORIGINS = [
+    "https://flight-delay-prediction-front-end.vercel.app",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
