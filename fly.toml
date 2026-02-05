@@ -1,13 +1,16 @@
-# fly.toml app configuration file generated for flightprediction-backend on 2026-02-02T22:58:24+02:00
+# fly.toml app configuration file generated for flightprediction-backend on 2026-02-05T21:24:49+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'flightprediction-backend'
-primary_region = 'iad'
+primary_region = 'lax'
 console_command = '/code/manage.py shell'
 
 [build]
+
+[deploy]
+  release_command = 'python manage.py migrate --noinput'
 
 [env]
   PORT = '8000'
@@ -21,9 +24,9 @@ console_command = '/code/manage.py shell'
   processes = ['app']
 
 [[vm]]
-  memory = '16gb'
-  cpus = 8
-  memory_mb = 16384
+  memory = '4gb'
+  cpus = 2
+  memory_mb = 4096
 
 [[statics]]
   guest_path = '/code/static'

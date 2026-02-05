@@ -1,0 +1,1 @@
+DATABASE_URL=postgresql://fly-user:agyQnlG8jPG75xtblCHAm8nt@pgbouncer.nlkxjo59e9lry93v.flympg.net/fly-db
