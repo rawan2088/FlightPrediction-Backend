@@ -23,16 +23,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    
+
+
     # Third-party apps
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',   # needed for logout via blacklisting
     'corsheaders',
     'whitenoise.runserver_nostatic',        # white noise
-    
+
     # My apps
     'users',
+    'predictions',
 
 ]
 
@@ -132,3 +134,11 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+# The ML service. Called server-side only (see
+# predictions/services.py) — the frontend no longer talks to it directly.
+ML_PREDICTION_API_URL = env(
+    'ML_PREDICTION_API_URL',
+    default='https://flight-delay-prediction-system.fly.dev/predict',
+)
+ML_PREDICTION_API_TIMEOUT = env.int('ML_PREDICTION_API_TIMEOUT', default=15)
