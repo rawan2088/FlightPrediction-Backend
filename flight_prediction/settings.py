@@ -112,6 +112,7 @@ STATIC_URL = 'static/'
 
 CORS_ALLOWED_ORIGINS = [
     "https://flight-delay-prediction-front-end.vercel.app",
+    "http://localhost:5173"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
